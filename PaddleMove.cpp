@@ -4,12 +4,7 @@
 
 void PaddleMove::Move()
 {
-	float oldPos = gameObject->transform->GetPosition().x;
-	float newPos = mousePosistion.x;
- 	gameObject->transform->SetPosition({ newPos , height });
-	Vector2<float>* Sweep = collider->Sweep();
-	if (Sweep != nullptr) //reset position if nothing was hit
-		gameObject->transform->SetPosition({ oldPos , height });
+	gameObject->transform->SetPosition({ mousePosistion.x , height });
 }
 
 PaddleMove::PaddleMove(GameObject* go)
@@ -24,19 +19,7 @@ void PaddleMove::Start()
 	collider->physicBody = true;
 }
 
-void PaddleMove::Update()
-{
-}
-
 void PaddleMove::FixedUpdate()
 {
 	Move();
-}
-
-void PaddleMove::LateUpdate()
-{
-}
-
-void PaddleMove::Destroy()
-{
 }

@@ -10,8 +10,6 @@ private:
 	Vector2<float> right = { 1.0f,0.0f };
 
 public:
-	Transform();
-
 	Vector2<float> GetUp();
 	Vector2<float> GetRight();
 

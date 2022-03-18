@@ -15,21 +15,17 @@ private:
 
 public:
 	Vector2<float>* corners{};
-	std::vector<Line> lines{};
+	Line* lines{};
 	GameObject* gameObject;
 	bool physicBody{ false };
-	void (*OnCollision)(GameObject*, Vector2<float>) = nullptr;
+	bool isColliding;
+	void (*OnCollision)(GameObject*, GameObject*, Vector2<float>) = nullptr;
 
 	BoxCollider(GameObject*, Vector2<float>);
 	~BoxCollider();
 
-	Vector2<float>* Sweep();
-
-	void Start() override;
-	void Update() override;
 	void FixedUpdate() override;
 	void LateUpdate() override;
-	void LateFixedUpdate() override;
 	void Destroy() override;
 
 	Vector2<float> GetNormal(Line&, Vector2<float>&);

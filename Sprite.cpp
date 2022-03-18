@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include <iostream>
 
 Sprite::Sprite(const char* path, GameObject* go)
 { 
@@ -12,19 +11,6 @@ Sprite::Sprite(const char* path, GameObject* go)
 	sizeX = w / 2;
 	sizeY = h / 2;
 	texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
-}
-
-void Sprite::Start()
-{
-}
-
-void Sprite::Update()
-{
-}
-
-void Sprite::FixedUpdate()
-{
-
 }
 
 void Sprite::LateUpdate()

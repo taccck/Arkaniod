@@ -6,22 +6,22 @@ class Level
 {
 private:
 	std::list<GameObject*> gameObjects;
-	std::vector<GameObject*> markedForDelete;
+	std::vector<GameObject*> gameObjectsToDelete;
 	Level* self = this;
 
 	void Update();
 	void FixedUpdate();
 	void LateUpdate();
-	void LateFixedUpdate();
 	void Destroy();
 	void DeleteMarked();
+	void LoadNewLevel();
 
 public:
 	Level();
-	~Level();
 
 	void AddGameObject(GameObject* gameObject);
 	void RemoveGameObject(GameObject* gameObject);
+	void NewLevel(Level* lvl);
 
 	void Start();
 	void Tick();

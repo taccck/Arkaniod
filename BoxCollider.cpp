@@ -20,15 +20,16 @@ void BoxCollider::UpdateCorners()
 	corners[3] = Vector2<float>(pos.x - scaledSize.x, pos.y + scaledSize.y);
 	corners[4] = pos;
 
-	lines.clear();
+	delete[] lines;
+	lines = new Line[4];
 	Line topLine = Line(corners[3], corners[0]);
-	lines.push_back(topLine);
+	lines[0] = topLine;
 	Line rightLine = Line(corners[0], corners[1]);
-	lines.push_back(rightLine);
+	lines[1] = rightLine;
 	Line botLine = Line(corners[1], corners[2]);
-	lines.push_back(botLine);
+	lines[2] = botLine;
 	Line leftLine = Line(corners[2], corners[3]);
-	lines.push_back(leftLine);
+	lines[3] = leftLine;
 }
 
 bool BoxCollider::CheckCollision()
@@ -41,10 +42,12 @@ bool BoxCollider::CheckCollision()
 		float longestDist = 0.f;
 		Vector2<float> boxPos = box->corners[4];
 
-		for (Line otherLine : box->lines)
+		for (size_t o = 0; o < 4; o++)
 		{
-			for (Line thisLine : lines)
+			Line otherLine = box->lines[o];
+			for (size_t t = 0; t < 4; t++)
 			{
+				Line thisLine = lines[t];
 				Vector2<float> intersect = Line::PointOfIntersection(thisLine, otherLine);
 				if (thisLine.IntersectBetween(intersect) && otherLine.IntersectBetween(intersect))
 				{
@@ -61,7 +64,9 @@ bool BoxCollider::CheckCollision()
 		if (longestDist > .1F)
 		{
 			if (OnCollision != nullptr)
-				OnCollision(gameObject, box->GetNormal(collidedWith, boxPos));
+				OnCollision(gameObject, box->gameObject, box->GetNormal(collidedWith, boxPos));
+			if (!box->physicBody && box->OnCollision != nullptr)
+				box->OnCollision(box->gameObject, gameObject, { 6969.f, 6969.f });
 			return true;
 		}
 	}
@@ -73,67 +78,12 @@ BoxCollider::BoxCollider(GameObject* go, Vector2<float> pixelSize)
 	size = pixelSize;
 	gameObject = go;
 	allColliders.push_back(self);
+	isColliding = false;
 }
 
 BoxCollider::~BoxCollider()
 {
 	Destroy();
-}
-
-Vector2<float>* BoxCollider::Sweep()
-{
-	UpdateCorners();
-
-	for (BoxCollider* box : allColliders)
-	{
-		if (box == self) continue;
-
-		Line* collidedWith = nullptr;
-		float longestDist = 0.f;
-		Vector2<float> boxPos = box->corners[4];
-
-		for (Line otherLine : box->lines)
-		{
-			for (Line thisLine : lines)
-			{
-				Vector2<float> intersect = Line::PointOfIntersection(thisLine, otherLine);
-				if (thisLine.IntersectBetween(intersect) && otherLine.IntersectBetween(intersect))
-				{
-					float dist = Vector2<float>::Distance(corners[4], intersect);
-					if (dist > longestDist)
-						collidedWith = &otherLine;
-				}
-			}
-		}
-
-		if (collidedWith != nullptr)
-		{
-			Vector2<float> normal = box->GetNormal(*collidedWith, boxPos);
-			if (OnCollision != nullptr)
-				OnCollision(box->gameObject, normal);
-			Vector2<float> boxPos = { box->corners[4] };
-			Vector2<float> relativePos = corners[4]; //wrong??
-			relativePos = { relativePos.x - boxPos.x, relativePos.y - boxPos.y };
-			relativePos.Normalize();
-			Vector2<float> perp = { -normal.y, normal.x };
-			float scalarProjection = relativePos.x * perp.x + relativePos.y * perp.y;
-			if (scalarProjection < 0)
-			{
-				perp = { normal.y, -normal.x };
-				scalarProjection = relativePos.x * perp.x + relativePos.y * perp.y;
-			}
-			return new Vector2<float>(perp.x * scalarProjection, perp.y * scalarProjection);
-		}
-	}
-	return 0;
-}
-
-void BoxCollider::Start()
-{
-}
-
-void BoxCollider::Update()
-{
 }
 
 void BoxCollider::FixedUpdate()
@@ -145,8 +95,8 @@ void BoxCollider::FixedUpdate()
 		updatedThisFrame = true;
 	}
 
-	if (!physicBody)
-		CheckCollision();
+	if (physicBody)
+		isColliding = CheckCollision();
 }
 
 void BoxCollider::LateUpdate()
@@ -154,15 +104,10 @@ void BoxCollider::LateUpdate()
 	updatedThisFrame = false;
 }
 
-void BoxCollider::LateFixedUpdate()
-{
-}
-
 void BoxCollider::Destroy()
 {
 	allColliders.remove(self);
-	lines.clear();
-	lines.shrink_to_fit();
+	delete[] lines;
 	delete[] corners;
 }
 

@@ -27,7 +27,6 @@ public:
 
 	void Start();
 	void Update();
-	void LateFixedUpdate();
 	void FixedUpdate();
 	void LateUpdate();
 };

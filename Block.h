@@ -1,4 +1,5 @@
 #pragma once
 #include "Level.h"
+#include <string>
 
-void Blocks(Level* lvl, int height, int width);
+void Blocks(Level* lvl, std::string levelName);

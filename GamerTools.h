@@ -33,18 +33,6 @@ public:
 		return norm;
 	}
 
-	void operator*=(float value)
-	{
-		x *= value;
-		y *= value;
-	}
-
-	void operator/=(float value)
-	{
-		x /= value;
-		y /= value;
-	}
-
 	static float Magnitude(Vector2<T> vector)
 	{
 		return sqrt(pow(vector.x, 2) + pow(vector.y, 2));
@@ -61,10 +49,10 @@ struct Line
 {
 	float slope{};
 	float yIntercept{};
-	float xIntercept{};
-	bool vertical{};
-	bool horizontal{};
-	Vector2<float> points[2]{};
+	float xIntercept{}; 
+	bool vertical{}; //the line only has one x value
+	bool horizontal{}; //the line only has one y value
+	Vector2<float> points[2]{}; //defines the line segment
 
 	Line() {}
 
@@ -87,7 +75,7 @@ struct Line
 			horizontal = true;
 			return;
 		}
-		slope = (b.y - a.y) / (b.x - a.x);
+		slope = deltaX / deltaY;
 		yIntercept = -1 * (slope * a.x - a.y);
 	}
 
@@ -123,7 +111,7 @@ struct Line
 		return perp;
 	}
 
-	bool IntersectBetween(Vector2<float>& intersectPoint)
+	bool IntersectBetween(Vector2<float>& intersectPoint) //returns if a point is on the line segment
 	{
 		if (abs(intersectPoint.x - 6969.F) < 1.F) return false;
 		if (abs(intersectPoint.y - 6969.F) < 1.F) return false;

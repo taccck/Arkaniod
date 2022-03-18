@@ -116,13 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Projects\Libraries\SDL2_image-2.0.5\include;C:\Projects\Libraries\SDL2-2.0.20\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_image-2.0.5\include;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2-2.0.20\include;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Projects\Libraries\SDL2_image-2.0.5\lib\x64;C:\Projects\Libraries\SDL2-2.0.20\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2-2.0.20\lib\x64;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x64;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_image-2.0.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,38 +145,56 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BaseLevel.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BlockBehavior.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamerTools.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelBuilder.cpp" />
+    <ClCompile Include="LevelButtons.cpp" />
+    <ClCompile Include="LevelCreatorButtons.cpp" />
+    <ClCompile Include="LevelSelection.cpp" />
+    <ClCompile Include="LevelThatMakesLevels.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovingBody.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PaddleMove.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="BaseLevel.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BlockBehavior.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="GamerTools.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelBuilder.h" />
+    <ClInclude Include="LevelButtons.h" />
+    <ClInclude Include="LevelCreatorButtons.h" />
+    <ClInclude Include="LevelSelection.h" />
+    <ClInclude Include="LevelThatMakesLevels.h" />
     <ClInclude Include="MovingBody.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PaddleMove.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

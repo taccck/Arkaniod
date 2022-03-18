@@ -3,5 +3,3 @@
 #include "Level.h"
 
 void Ball(Level*);
-
-extern MovingBody* currBall;

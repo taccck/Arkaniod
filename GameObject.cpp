@@ -21,12 +21,6 @@ void GameObject::Update()
 		component->Update();
 }
 
-void GameObject::LateFixedUpdate()
-{
-	for (Component* component : components)
-		component->LateFixedUpdate();
-}
-
 void GameObject::Start()
 {
 	for (Component* component : components)

@@ -1,19 +1,12 @@
 #include "Level.h"
 #include <algorithm>
-#include <iostream>
 
 Level* currLevel;
 
 Level::Level()
 {
-	currLevel = self;
 	gameObjects;
-	markedForDelete;
-}
-
-Level::~Level()
-{
-	Destroy();
+	gameObjectsToDelete;
 }
 
 void Level::AddGameObject(GameObject* gameObject)
@@ -23,7 +16,13 @@ void Level::AddGameObject(GameObject* gameObject)
 
 void Level::RemoveGameObject(GameObject* gameObject)
 {
-	markedForDelete.push_back(gameObject);
+	gameObjectsToDelete.push_back(gameObject);
+}
+
+void Level::NewLevel(Level* lvl)
+{
+	currLevel = lvl;
+	Destroy();
 }
 
 void Level::Tick()
@@ -32,6 +31,7 @@ void Level::Tick()
 	FixedUpdate();
 	LateUpdate();
 	DeleteMarked();
+	LoadNewLevel();
 }
 
 void Level::Start()
@@ -58,27 +58,26 @@ void Level::LateUpdate()
 		gameObject->LateUpdate();
 }
 
-void Level::LateFixedUpdate()
-{
-	for (GameObject* gameObject : gameObjects)
-		gameObject->LateFixedUpdate();
-}
-
 void Level::Destroy()
 {
 	for (GameObject* gameObject : gameObjects)
-		delete gameObject;
+		gameObjectsToDelete.push_back(gameObject);
 }
 
 void Level::DeleteMarked()
 {
-	if (markedForDelete.size() > 0)
+	if (gameObjectsToDelete.size() == 0) return;
+
+	for (GameObject* go : gameObjectsToDelete)
 	{
-		for (GameObject* go : markedForDelete)
-		{
-			gameObjects.remove(go);
-			delete go;
-		}
-		markedForDelete.clear();
+		gameObjects.remove(go);
+		delete go;
 	}
+	gameObjectsToDelete.clear();
+}
+
+void Level::LoadNewLevel()
+{
+	if (currLevel != self)
+		delete self;
 }

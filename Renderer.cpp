@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "SDL_ttf.h"
 
 int screenHeight{};
 int screenWidth{};
@@ -27,6 +28,8 @@ void InitializeRenderer()
 
 	win = SDL_CreateWindow("Arkaniod", 0, 0, screenWidth, screenHeight, 0);
 	renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+
+	TTF_Init();
 }
 
 void DeleteRenderer()

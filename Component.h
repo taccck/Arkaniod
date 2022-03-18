@@ -6,7 +6,6 @@ class Component
 public:
 	virtual void Start() {};
 	virtual void FixedUpdate() {};
-	virtual void LateFixedUpdate() {};
 	virtual void Update() {};
 	virtual void LateUpdate() {};
 	virtual void Destroy() {};

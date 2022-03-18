@@ -4,6 +4,7 @@
 Vector2<float> mousePosistion{};
 Vector2<int> arrowKeys{};
 bool keys[SDL_NUM_SCANCODES] = { false };
+bool button[3];
 
 void UpdateInput(bool& playing)
 {
@@ -19,6 +20,14 @@ void UpdateInput(bool& playing)
 
 		case SDL_QUIT:
 			playing = false;
+			break;
+
+		case SDL_MOUSEBUTTONDOWN:
+			button[e.button.button] = true;
+			break;
+
+		case SDL_MOUSEBUTTONUP:
+			button[e.button.button] = false;
 			break;
 
 		case SDL_KEYDOWN:

@@ -2,10 +2,6 @@
 #include "cmath"
 #include "Renderer.h"
 
-Transform::Transform()
-{
-}
-
 Vector2<float> Transform::GetUp()
 {
 	return up;
@@ -36,7 +32,7 @@ void Transform::SetRotation(float radians)
 {
 	Vector2<float> scale = GetScale();
 	Vector2<float> newRight = { cos(radians), sin(radians) };
-	right = { newRight.x * scale.x,  newRight.y * scale.x};
+	right = { newRight.x * scale.x,  newRight.y * scale.x };
 	Vector2<float> newUp = { newRight.y, newRight.x };
 	up = { newRight.x * scale.y,  newRight.y * scale.y };
 }
@@ -59,8 +55,10 @@ void Transform::SetScale(Vector2<float> scale)
 {
 	Vector2<float> oldScale = GetScale();
 
-	right *= scale.x / oldScale.x;
-	up *= scale.y / oldScale.y;
+	Vector2<float> newScale = { scale.x / oldScale.x , scale.y / oldScale.y };
+
+	right = { right.x * newScale.x, right.y * newScale.x };
+	up = { up.x * newScale.y, up.y * newScale.y };
 }
 
 SDL_Rect Transform::GetRect(float sizeX, float sizeY)
@@ -72,5 +70,4 @@ SDL_Rect Transform::GetRect(float sizeX, float sizeY)
 	SDL_Rect transRect = { screenPos.x - scale.x * sizeX, screenPos.y - scale.y * sizeY,
 		pixelSize.x, pixelSize.y };
 	return transRect;
-
 }
