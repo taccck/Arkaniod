@@ -116,14 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_image-2.0.5\include;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2-2.0.20\include;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Libraries\SDL2_image-2.0.5\include;Libraries\SDL2-2.0.20\include;Libraries\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2-2.0.20\lib\x64;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x64;C:\Projects\PracticeStuff\ArkaniodGit\Libraries\SDL2_image-2.0.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Libraries\SDL2-2.0.20\lib\x64;Libraries\SDL2_ttf-devel-2.0.12-VC\SDL2_ttf-2.0.12\lib\x64;Libraries\SDL2_image-2.0.5\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
