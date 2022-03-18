@@ -3,6 +3,3 @@
 
 # build files
 build/
-
-# bin files (output)
-x64/
