@@ -79,5 +79,7 @@ void Level::DeleteMarked()
 void Level::LoadNewLevel()
 {
 	if (currLevel != self)
-		delete self;
+		delete self; // feedback: while it is legal to delete "this" from compiler point of view, I'd say this is an ask for trouble.
+					 // especially considering this function is called LoadNewLevel. This is a high chance that this instance will be used
+					 // used after it is being deleted. This will result in pure UB
 }

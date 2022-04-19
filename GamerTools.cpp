@@ -2,7 +2,7 @@
 #include <SDL.h>
 
 float deltaTime{};
-const float fixedDeltaTime{ .02f };
+const float fixedDeltaTime{ .02f }; // feedback: not used anywhere. Not sure if fixed update function is used in any of game objects either..
 Uint64 previous_ticks = SDL_GetPerformanceCounter();
 
 void UpdateDeltaTime()
