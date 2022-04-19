@@ -13,7 +13,7 @@ Level* LoadLevelFromFile(std::string levelName)
 	Ball(baseLevel);
 	Blocks(baseLevel, levelName);
 	BackButton(baseLevel);
-	baseLevel->Start();
+	baseLevel->Start(); // feedback: start called 2 times
 	baseLevel->Start();
 	return baseLevel;
 }

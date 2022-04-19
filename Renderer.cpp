@@ -34,6 +34,7 @@ void InitializeRenderer()
 
 void DeleteRenderer()
 {
+	// feedback: doesn't look like this is called from anywhere
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(win);
 }

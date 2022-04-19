@@ -26,7 +26,7 @@ void Button::Update()
 	state = 1;
 	if (!button[1]) return;
 
-	state = 2;
+	state = 2; // feedback: hard to understand what are those numbers. Usually enums are used for such purposes as they have a readable name.
 	if (OnClick != nullptr)
 		OnClick(self);
 }
